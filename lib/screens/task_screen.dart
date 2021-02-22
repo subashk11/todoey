@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:todoey_flutter/screens/add_task_screen.dart';
 import 'package:todoey_flutter/widgets/task_view.dart';
 import 'package:todoey_flutter/modals/task.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_flutter/modals/task_data.dart';
 
 class TasksScreen extends StatefulWidget {
   @override
@@ -20,11 +22,7 @@ class _TasksScreenState extends State<TasksScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskScreen((newTaskTitle) {
-              setState(() {
-                tasks.add(Task(name: newTaskTitle));
-              });
-            }),
+            builder: (context) => AddTaskScreen(),
             isScrollControlled: true,
           );
         },
@@ -62,7 +60,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   height: 10.0,
                 ),
                 Text(
-                  '${tasks.length} tasks',
+                  '${Provider.of<TaskData>(context).tasks.length} tasks',
                   style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,
@@ -81,7 +79,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(30.0),
                 ),
               ),
-              child: TaskList(tasks),
+              child: TaskList(),
             ),
           ),
         ],

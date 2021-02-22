@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_flutter/modals/task_data.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class AddTaskScreen extends StatelessWidget {
-  AddTaskScreen(this.addTaskCallback);
-  final Function addTaskCallback;
   String typedData;
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class AddTaskScreen extends StatelessWidget {
             ),
             FlatButton(
               onPressed: () {
-                addTaskCallback(typedData);
+                Provider.of<TaskData>(context).addTask(typedData);
                 textController.clear();
                 Navigator.pop(context);
               },
